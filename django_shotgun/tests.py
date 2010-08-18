@@ -3,8 +3,6 @@ from HTMLParser import HTMLParser, HTMLParseError
 
 from django.test import TestCase
 
-from django_shotgun.utils import fixtures_file_path
-
 
 class DjangoParser(HTMLParser):
     """
@@ -51,7 +49,7 @@ class Tests(TestCase):
     Runs the DjangoParser over the entire site testing for HTTP error codes.
     """
     
-    fixtures = [fixtures_file_path()]
+    fixtures = ["shotgun.json"]
 
     def test_site(self):
         """

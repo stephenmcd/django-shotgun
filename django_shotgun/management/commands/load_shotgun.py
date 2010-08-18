@@ -19,16 +19,13 @@ class Command(dumpdata.Command):
         Call the ``dumpdata`` management command and store the output of it 
         into the shotgun fixtures file in the current project.
         """
-        exclude = kwargs.pop("exclude", [])
-        if "contenttypes" not in exclude:
-            exclude.append("contenttypes")
-        kwargs["exclude"] = exclude
-        path = kwargs.pop("path", None)
-        if path is None:
-            settings_module = __import__(os.environ["DJANGO_SETTINGS_MODULE"])
-            path = os.path.dirname(os.path.abspath(settings_module.__file__))
+        if "contenttypes" not in kwargs["exclude"]:
+            kwargs["exclude"].append("contenttypes")
+        if not kwargs["path"]:
+            s = __import__(os.environ["DJANGO_SETTINGS_MODULE"])
+            kwargs["path"] = os.path.dirname(os.path.abspath(s.__file__))
         try:
-            with open(os.path.join(path, "shotgun.json"), "w") as f:
+            with open(os.path.join(kwargs["path"], "shotgun.json"), "w") as f:
                 f.write(dumpdata.Command.handle(self, *args, **kwargs))
         except Exception, e:
             raise CommandError(e)

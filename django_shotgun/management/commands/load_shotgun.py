@@ -19,8 +19,6 @@ class Command(dumpdata.Command):
         if "contenttypes" not in exclude:
             exclude.append("contenttypes")
         kwargs["exclude"] = exclude
-        settings = __import__(os.environ["DJANGO_SETTINGS_MODULE"])
-        project_path = os.path.dirname(os.path.abspath(settings.__file__))
         try:
             with open(fixtures_file_path(), "w") as f:
                 f.write(dumpdata.Command.handle(self, *args, **kwargs))

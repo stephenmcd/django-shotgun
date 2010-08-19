@@ -1,12 +1,13 @@
 Introduction
 ============
 
-A Django application providing the ability to validate HTTP status codes 
-across your entire Django application. ``django-shotgun`` 
-consists of two parts, a `management command`_ called ``load_shotgun`` that 
-prepares ``django-shotgun`` with a snapshot of your database to use in the 
-test case, and the `Django test case`_ itself which spiders your Django site 
-testing for valid HTTP status codes for every URL it finds.
+``django-shotgun`` is a Django application that provides the ability to 
+validate HTTP status codes across your entire Django application. 
+``django-shotgun`` consists of two parts, a `management command`_ called 
+``load_shotgun`` that prepares ``django-shotgun`` with a snapshot of your 
+database to use in the `Django test case`_, and the test case itself which 
+spiders your Django site testing for valid HTTP status codes for every URL 
+it finds.
 
 Installation
 ============
@@ -32,20 +33,20 @@ purposely does not use the project's real database to run tests.
 ``django-shotgun`` deals with this by providing a management command called 
 ``load_shotgun`` which dumps the contents of your database to a fixture called 
 ``shotgun.json``. Under the hood, ``load_shotgun`` extends the built-in 
-```dumpdata`_`` command and supports the same options with one extra option
+`dumpdata`_ command and supports the same options, with one extra option
 called ``path`` which allows you to define where the fixture file should be 
 saved to::
 
     $ python manage.py load_shotgun --path=/path/to/fixtures/
 
-If the ``path`` option is omitted the fixture file will be saved to the root 
+If the ``path`` option is omitted, the fixture file will be saved to the root 
 of the current project.
 
 Shotgun Firing
 ==============
 
 The ``django-shotgun`` test case is a standard Django test case and can 
-therefore be run by calling the standard ``test`` management command::
+therefore be run by calling the built-in ``test`` management command::
 
     $ python manage.py test
 

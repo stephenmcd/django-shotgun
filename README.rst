@@ -58,6 +58,15 @@ tested with both a ``GET`` and ``POST``, first without any field data and
 then with test values for each form field. The test case will fail if any 
 response returns a status code other than ``200``.
 
+Configuration
+=============
+
+The following settings can be defined in your project's ``settings`` module 
+to control the behaviour of ``django-shotgun``.
+
+  * ``SHOTGUN_PATH`` - The path to where the fixture file will be saved and loaded from. Defaults to the root directory of your project.
+  * ``SHOTGUN_ROOT_URL`` - The first URL that the test case will request. Defaults to ``/``.
+
 .. _`management command`: http://docs.djangoproject.com/en/dev/ref/django-admin/#ref-django-admin
 .. _`Django test case`: http://docs.djangoproject.com/en/dev/topics/testing/#testcase
 .. _`setuptools`: http://pypi.python.org/pypi/setuptools

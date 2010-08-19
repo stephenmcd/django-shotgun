@@ -6,6 +6,8 @@ from django.core.management.base import CommandError
 from django.core.management.commands import dumpdata
 from django.conf import settings
 
+from django_shotgun.settings import SHOTGUN_PATH, SHOTGUN_NAME
+
 
 class Command(dumpdata.Command):
     
@@ -22,10 +24,12 @@ class Command(dumpdata.Command):
         if "contenttypes" not in kwargs["exclude"]:
             kwargs["exclude"].append("contenttypes")
         if not kwargs["path"]:
-            s = __import__(os.environ["DJANGO_SETTINGS_MODULE"])
-            kwargs["path"] = os.path.dirname(os.path.abspath(s.__file__))
+            kwargs["path"] = SHOTGUN_PATH
+            if not kwargs["path"]:
+                s = __import__(os.environ["DJANGO_SETTINGS_MODULE"])
+                kwargs["path"] = os.path.dirname(os.path.abspath(s.__file__))
         try:
-            with open(os.path.join(kwargs["path"], "shotgun.json"), "w") as f:
+            with open(os.path.join(kwargs["path"], SHOTGUN_NAME), "w") as f:
                 f.write(dumpdata.Command.handle(self, *args, **kwargs))
         except Exception, e:
             raise CommandError(e)

@@ -1,7 +1,10 @@
 
+import os
 from HTMLParser import HTMLParser, HTMLParseError
 
 from django.test import TestCase
+
+from django_shotgun import settings
 
 
 class DjangoParser(HTMLParser):
@@ -49,7 +52,7 @@ class Tests(TestCase):
     Runs the DjangoParser over the entire site testing for HTTP error codes.
     """
     
-    fixtures = ["shotgun.json"]
+    fixtures = [os.path.join(settings.SHOTGUN_PATH, settings.SHOTGUN_NAME)]
 
     def test_site(self):
         """
@@ -65,7 +68,7 @@ class Tests(TestCase):
         was parsed as a form action. When dealing with a form URL test it by 
         performing both a GET and POST with the form data.
         """
-        todo = [("/", None)] # Homepage
+        todo = [(settings.SHOTGUN_ROOT_URL, None)] # Start URL
         done = []
         while True:
             url, data = todo.pop(0)

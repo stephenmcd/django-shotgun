@@ -2,4 +2,4 @@ syntax: glob
 *.pyc
 build/*
 dist/*
-
+django_shotgun.egg-info/*

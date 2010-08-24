@@ -64,6 +64,7 @@ Configuration
 The following settings can be defined in your project's ``settings`` module 
 to control the behaviour of ``django-shotgun``.
 
+  * ``SHOTGUN_EXCLUDE`` - A list of app names to exclude when generating the shotgun fixtures file. Defaults to ``[]``.
   * ``SHOTGUN_PATH`` - The path to where the fixture file will be saved and loaded from. Defaults to the root directory of your project.
   * ``SHOTGUN_ROOT_URL`` - The first URL that the test case will request. Defaults to ``/``.
 

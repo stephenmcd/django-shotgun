@@ -6,7 +6,7 @@ from django.core.management.base import CommandError
 from django.core.management.commands import dumpdata
 from django.conf import settings
 
-from django_shotgun.settings import SHOTGUN_PATH, SHOTGUN_NAME
+from django_shotgun.settings import SHOTGUN_PATH, SHOTGUN_NAME, SHOTGUN_EXCLUDE
 
 
 class Command(dumpdata.Command):
@@ -21,6 +21,7 @@ class Command(dumpdata.Command):
         Call the ``dumpdata`` management command and store the output of it 
         into the shotgun fixtures file in the current project.
         """
+        kwargs["exclude"].extend(SHOTGUN_EXCLUDE)
         if "contenttypes" not in kwargs["exclude"]:
             kwargs["exclude"].append("contenttypes")
         if not kwargs["path"]:

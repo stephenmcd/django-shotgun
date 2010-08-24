@@ -76,11 +76,11 @@ class Tests(TestCase):
             # Build a list of responses, since a form URL will be tested 
             # more than once via POST and GET.
             if not data:
-                responses = [self.client.get(url)]
+                responses = [self.client.get(url, follow=True)]
             else:
                 responses = [
-                    self.client.get(url, data=data), 
-                    self.client.post(url, data=data),
+                    self.client.get(url, data=data, follow=True), 
+                    self.client.post(url, data=data, follow=True),
                 ]
             urls = []
             forms = []

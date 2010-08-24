@@ -1,7 +1,7 @@
 
 from django.conf import settings
 
-# List of apps to exclude when generating the shotgun fixtures file.
+# A list of app names to exclude when generating the shotgun fixtures file.
 SHOTGUN_EXCLUDE = getattr(settings, "SHOTGUN_EXCLUDE", [])
 
 # Name of the shotgun fixture file.

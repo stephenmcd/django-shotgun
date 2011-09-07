@@ -1,7 +1,7 @@
 
 from setuptools import setup, find_packages
- 
- 
+
+
 setup(
     name = "django-shotgun",
     version = __import__("django_shotgun").__version__,
@@ -12,6 +12,7 @@ setup(
     url = "http://github.com/stephenmcd/django-shotgun",
     zip_safe = False,
     packages = find_packages(),
+    install_requires=["sphinx-me",],
     classifiers = [
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
@@ -23,4 +24,3 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: Site Management",
     ]
 )
-

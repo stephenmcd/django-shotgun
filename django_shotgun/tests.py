@@ -5,7 +5,8 @@ from HTMLParser import HTMLParser, HTMLParseError
 from django.test import TestCase
 import requests
 
-from django_shotgun.settings import FIXTURE_NAME, FIXTURE_PATH, ROOT_URL
+from django_shotgun.settings import EXCLUDE_URLS, ROOT_URL, \
+                                    FIXTURE_NAME, FIXTURE_PATH
 
 
 external = lambda u: u.lower().startswith(("http://", "https://", "mailto:"))
@@ -28,7 +29,7 @@ class DjangoParser(HTMLParser):
         HTMLParser.__init__(self)
 
     def valid_url(self, url):
-        return url.startswith(ROOT_URL) and "/__debug__/" not in url
+        return url.startswith(ROOT_URL) and url not in EXCLUDE_URLS
 
     def prefix_host(self, url):
         if url and external(ROOT_URL) and not external(url):

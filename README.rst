@@ -69,6 +69,8 @@ module to control the behaviour of ``django-shotgun``.
 
   * ``SHOTGUN_EXCLUDE_APPS`` - A list of app names to exclude when
     generating the shotgun fixtures file. Defaults to ``[]``.
+  * ``SHOTGUN_EXCLUDE_URLS`` - A list of URLs to exclude from checking.
+    Defaults to ``[]``.
   * ``SHOTGUN_FIXTURE_NAME`` - The name of the fixture file that will
     be saved and loaded from. Defaults to ``shotgun.json``.
   * ``SHOTGUN_FIXTURE_PATH`` - The path to where the fixture file will

@@ -5,7 +5,7 @@ from HTMLParser import HTMLParser, HTMLParseError
 from django.test import TestCase
 import requests
 
-from django_shotgun import settings
+from django_shotgun.settings import FIXTURE_NAME, FIXTURE_PATH, ROOT_URL
 
 
 external = lambda u: u.lower().startswith(("http://", "https://", "mailto:"))
@@ -28,12 +28,11 @@ class DjangoParser(HTMLParser):
         HTMLParser.__init__(self)
 
     def valid_url(self, url):
-        return (url.startswith(settings.SHOTGUN_ROOT_URL)
-                and "/__debug__/" not in url)
+        return url.startswith(ROOT_URL) and "/__debug__/" not in url
 
     def prefix_host(self, url):
-        if url and external(settings.SHOTGUN_ROOT_URL) and not external(url):
-            url = settings.SHOTGUN_ROOT_URL.rstrip("/") + "/" + url.lstrip("/")
+        if url and external(ROOT_URL) and not external(url):
+            url = ROOT_URL.rstrip("/") + "/" + url.lstrip("/")
         return url
 
     def handle_starttag(self, tag, attrs):
@@ -64,7 +63,7 @@ class Tests(TestCase):
     Runs the DjangoParser over the entire site testing for HTTP error codes.
     """
 
-    fixtures = [os.path.join(settings.SHOTGUN_PATH, settings.SHOTGUN_NAME)]
+    fixtures = [os.path.join(FIXTURE_PATH, FIXTURE_NAME)]
 
     def test_site(self):
         """
@@ -80,7 +79,7 @@ class Tests(TestCase):
         was parsed as a form action. When dealing with a form URL test it by
         performing both a GET and POST with the form data.
         """
-        todo = [(settings.SHOTGUN_ROOT_URL, None)] # Start URL
+        todo = [(ROOT_URL, None)] # Start URL
         done = []
         while True:
             url, data = todo.pop(0)

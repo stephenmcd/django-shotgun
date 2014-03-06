@@ -2,15 +2,15 @@
 from django.conf import settings
 
 # A list of app names to exclude when generating the shotgun fixtures file.
-SHOTGUN_EXCLUDE = getattr(settings, "SHOTGUN_EXCLUDE", [])
+EXCLUDE_APPS = getattr(settings, "SHOTGUN_EXCLUDE_APPS", [])
 
 # Name of the shotgun fixture file.
-SHOTGUN_NAME = getattr(settings, "SHOTGUN_NAME", "shotgun.json")
+FIXTURE_NAME = getattr(settings, "SHOTGUN_FIXTURE_NAME", "shotgun.json")
 
 # Path to the shotgun fixture file.
-SHOTGUN_PATH = getattr(settings, "SHOTGUN_PATH", "")
+FIXTURE_PATH = getattr(settings, "SHOTGUN_FIXTURE_PATH", "")
 
 # The first URL that the shotgun test will request.
-SHOTGUN_ROOT_URL = getattr(settings, "SHOTGUN_ROOT_URL", "/")
+ROOT_URL = getattr(settings, "SHOTGUN_ROOT_URL", "/")
 
 

@@ -69,10 +69,10 @@ module to control the behaviour of ``django-shotgun``.
 
   * ``SHOTGUN_EXCLUDE_APPS`` - A list of app names to exclude when
     generating the shotgun fixtures file. Defaults to ``[]``.
-  * ``SHOTGUN_NAME`` - The name of the fixture file that will be saved
-    and loaded from. Defaults to ``shotgun.json``.
-  * ``SHOTGUN_PATH`` - The path to where the fixture file will be
-    saved and loaded from. Defaults to your project's root directory.
+  * ``SHOTGUN_FIXTURE_NAME`` - The name of the fixture file that will
+    be saved and loaded from. Defaults to ``shotgun.json``.
+  * ``SHOTGUN_FIXTURE_PATH`` - The path to where the fixture file will
+    be saved and loaded from. Defaults to the project's root directory.
   * ``SHOTGUN_ROOT_URL`` - The first URL that the test case will
     request. Defaults to ``/``.
 

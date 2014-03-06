@@ -10,7 +10,7 @@ from django_shotgun.settings import SHOTGUN_PATH, SHOTGUN_NAME, SHOTGUN_EXCLUDE
 
 
 class Command(dumpdata.Command):
-    
+
     option_list = dumpdata.Command.option_list + (
         make_option("--path", default="", dest="path",
             help="Specifies the path to save the shotgun fixtures."),
@@ -18,7 +18,7 @@ class Command(dumpdata.Command):
 
     def handle(self, *args, **kwargs):
         """
-        Call the ``dumpdata`` management command and store the output of it 
+        Call the ``dumpdata`` management command and store the output of it
         into the shotgun fixtures file in the current project.
         """
         kwargs["exclude"].extend(SHOTGUN_EXCLUDE)

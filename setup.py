@@ -12,7 +12,7 @@ setup(
     url = "http://github.com/stephenmcd/django-shotgun",
     zip_safe = False,
     packages = find_packages(),
-    install_requires=["sphinx-me",],
+    install_requires=["sphinx-me", "requests"],
     classifiers = [
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",

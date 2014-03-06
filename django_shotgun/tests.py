@@ -1,5 +1,6 @@
 
 import os
+import sys
 from HTMLParser import HTMLParser, HTMLParseError
 
 from django.test import TestCase
@@ -9,7 +10,14 @@ from django_shotgun.settings import EXCLUDE_URLS, ROOT_URL, \
                                     FIXTURE_NAME, FIXTURE_PATH
 
 
-external = lambda u: u.lower().startswith(("http://", "https://", "mailto:"))
+def external(url):
+    return url.lower().startswith(("http://", "https://", "mailto:"))
+
+
+def log(message):
+    args = " ".join(sys.argv)
+    if " -v 3" in args or " --verbosity=3" in args:
+        print message
 
 
 class DjangoParser(HTMLParser):
@@ -29,7 +37,10 @@ class DjangoParser(HTMLParser):
         HTMLParser.__init__(self)
 
     def valid_url(self, url):
-        return url.startswith(ROOT_URL) and url not in EXCLUDE_URLS
+        valid = url.startswith(ROOT_URL) and url not in EXCLUDE_URLS
+        if not valid and url:
+            log("Ignoring %s" % url)
+        return valid
 
     def prefix_host(self, url):
         if url and external(ROOT_URL) and not external(url):
@@ -105,6 +116,7 @@ class Tests(TestCase):
             # Test each response code and build lists of URLs and forms from
             # the parsed HTML.
             for response in responses:
+                log("HTTP %s for %s" % (response.status_code, url))
                 self.assertEqual(response.status_code, 200)
                 parser = DjangoParser(url)
                 try:
